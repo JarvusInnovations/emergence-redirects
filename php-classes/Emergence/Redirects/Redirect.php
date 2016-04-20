@@ -5,6 +5,7 @@ namespace Emergence\Redirects;
 use DB;
 use Site;
 use Cache;
+use TableNotFoundException;
 
 class Redirect extends \ActiveRecord
 {
@@ -91,7 +92,12 @@ class Redirect extends \ActiveRecord
                 return null;
             }
 
-            $redirects = DB::valuesTable('From', 'To', 'SELECT * FROM `%s`', static::$tableName);
+            try {
+                $redirects = DB::valuesTable('From', 'To', 'SELECT * FROM `%s`', static::$tableName);
+            } catch (TableNotFoundException $e) {
+                $redirects = [];
+            }
+
             Cache::store('redirects', $redirects);
         }
 
