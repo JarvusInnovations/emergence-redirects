@@ -12,6 +12,6 @@ Git::$repositories['emergence-redirects'] = [
         'php-config/Git.config.d/emergence-redirects.php',
         'php-config/Site.config.d/redirects.php',
 
-        'site-root/redirects.php'
-    ]
+        'site-root/redirects.php',
+    ],
 ];
